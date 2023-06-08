@@ -5,7 +5,6 @@ RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime
 COPY   lib/    /app/lib
 COPY   config/bootstrap.yml /app/config/bootstrap.yml
 
-
 COPY   smant-admin-gateway.jar  /app/smant-admin-gateway.jar
 #CMD echo "启动....."
 #CMD ["nginx","-g","daemon off;"]
