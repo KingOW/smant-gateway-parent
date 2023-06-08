@@ -7,6 +7,8 @@
     <file url="file://$PROJECT_DIR$/smant-api-gateway/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/smant-external-gateway/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/smant-external-gateway/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/smant-gateway-core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/smant-gateway-core/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
   </component>

@@ -6,9 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="smant-external-gateway" />
         <module name="smant-admin-gateway" />
         <module name="smant-api-gateway" />
-        <module name="smant-external-gateway" />
+        <module name="smant-gateway-core" />
       </profile>
     </annotationProcessing>
   </component>
