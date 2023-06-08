@@ -24,7 +24,7 @@ pipeline {
     }
 
     tools {
-        maven 'jenkins-maven3.8.1'
+        maven 'jenkins-maven3.8.1_2'
     }
 
     stages {
