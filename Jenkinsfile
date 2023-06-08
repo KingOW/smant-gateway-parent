@@ -45,7 +45,7 @@ pipeline {
         //检出代码
         stage("Check Out") {
             steps {
-                echo "========Check Out ${env.GIT_PROJECT_NAME} From Gitee========"
+                echo "========Check Out ${env.GIT_PROJECT_NAME} From Git========"
                 git branch: "${params.GIT_BRANCH}", credentialsId: "${env.GIT_CREDENTIALS_ID}", url: "${env.GIT_PROJECT_ADDR}"
             }
         }
@@ -54,7 +54,7 @@ pipeline {
             steps {
                 echo "========Compile&Package ${env.GIT_PROJECT_NAME} ========"
                 // 在有Jenkinsfile同一个目录下（项目的根目录下）
-                sh "mvn -B -U -DskipTests clean compile package -P${params.RUN_ENV}"
+                sh "cd  ${env.GIT_PROJECT_NAME}; mvn -B -U -DskipTests clean compile package -P${params.RUN_ENV}"
             }
         }
 
