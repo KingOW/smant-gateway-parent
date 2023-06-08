@@ -15,7 +15,7 @@ pipeline {
         IMAGE_NAME = "${env.GIT_PROJECT_NAME}"  // 镜像名一般和项目名相同
         VERSION = sh(script: "echo `date '+%Y%m%d%H%M%S'`", returnStdout: true).trim()
         IMAGE_VERSION_ID = "${env.GIT_PROJECT_BRANCH}-${env.VERSION}"
-        PROJECT_WORKSPACE = "/ylsk_worker/workspace/${env.GIT_PROJECT_NAME}/${env.GIT_PROJECT_BRANCH}"
+        PROJECT_WORKSPACE = "/smant/workspace/${env.GIT_PROJECT_NAME}/${env.GIT_PROJECT_BRANCH}"
         //REMOTE_SERVER="106.14.68.104"
 //        REMOTE_SERVER="172.20.246.204"
 //        REMOTE_USER="root"
@@ -52,9 +52,11 @@ pipeline {
         //编译&打包
         stage("Compile&Package") {
             steps {
-                echo "========Compile&Package ${env.GIT_PROJECT_NAME} ========"
-                // 在有Jenkinsfile同一个目录下（项目的根目录下）
-                sh "cd  ${env.GIT_PROJECT_NAME}; mvn -B -U -DskipTests clean compile package -P${params.RUN_ENV}"
+                dir("${env.GIT_PROJECT_NAME}") {//进入项目工作目录
+                    echo "========Compile&Package ${env.GIT_PROJECT_NAME} ========"
+                    // 在有Jenkinsfile同一个目录下（项目的根目录下）
+                    sh "mvn -B -U -DskipTests clean compile package -P${params.RUN_ENV}"
+                }
             }
         }
 
