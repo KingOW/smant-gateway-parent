@@ -15,8 +15,14 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <com.smant.gateway.core.version>2023.05.23-RELEASE</com.smant.gateway.core.version>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>com.smant.gateway</groupId>
+            <artifactId>smant-gateway-core</artifactId>
+            <version>${com.smant.gateway.core.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.smant</groupId>
             <artifactId>smant-common</artifactId>
