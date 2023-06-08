@@ -1,0 +1,22 @@
+[2023-06-08 13:15:49:184] [WARN] - com.alibaba.cloud.nacos.client.NacosPropertySourceBuilder.loadNacosData(NacosPropertySourceBuilder.java:87) - Ignore the empty nacos configuration and get it based on dataId[smant-admin-gateway] & group[DEFAULT_GROUP]
+[2023-06-08 13:15:49:208] [WARN] - com.alibaba.cloud.nacos.client.NacosPropertySourceBuilder.loadNacosData(NacosPropertySourceBuilder.java:87) - Ignore the empty nacos configuration and get it based on dataId[smant-admin-gateway.yml] & group[DEFAULT_GROUP]
+[2023-06-08 13:15:51:620] [WARN] - org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer.startServer(OptionalLiveReloadServer.java:62) - Unable to start LiveReload server
+[2023-06-08 13:15:51:769] [WARN] - org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:616) - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+[2023-06-08 13:15:51:806] [ERROR] - org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter.report(LoggingFailureAnalysisReporter.java:40) - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+[2023-06-08 13:15:51:811] [WARN] - com.alibaba.nacos.common.http.HttpClientBeanHolder.shutdown(HttpClientBeanHolder.java:108) - [HttpClientBeanHolder] Start destroying common HttpClient
+[2023-06-08 13:15:51:811] [WARN] - com.alibaba.nacos.common.notify.NotifyCenter.shutdown(NotifyCenter.java:136) - [NotifyCenter] Start destroying Publisher
+[2023-06-08 13:15:51:812] [WARN] - com.alibaba.nacos.common.notify.NotifyCenter.shutdown(NotifyCenter.java:153) - [NotifyCenter] Destruction of the end
+[2023-06-08 13:15:51:812] [WARN] - com.alibaba.nacos.common.http.HttpClientBeanHolder.shutdown(HttpClientBeanHolder.java:114) - [HttpClientBeanHolder] Destruction of the end

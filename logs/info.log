@@ -1,0 +1,52 @@
+[2023-06-08 13:15:47:183] [INFO] - org.hibernate.validator.internal.util.Version.<clinit>(Version.java:21) - HV000001: Hibernate Validator 8.0.0.Final
+[2023-06-08 13:15:47:292] [INFO] - org.springframework.boot.logging.DeferredLog.logTo(DeferredLog.java:250) - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+[2023-06-08 13:15:48:292] [INFO] - org.reflections.Reflections.scan(Reflections.java:232) - Reflections took 52 ms to scan 1 urls, producing 3 keys and 6 values 
+[2023-06-08 13:15:48:335] [INFO] - org.reflections.Reflections.scan(Reflections.java:232) - Reflections took 26 ms to scan 1 urls, producing 4 keys and 9 values 
+[2023-06-08 13:15:48:351] [INFO] - org.reflections.Reflections.scan(Reflections.java:232) - Reflections took 13 ms to scan 1 urls, producing 3 keys and 10 values 
+[2023-06-08 13:15:48:357] [INFO] - org.reflections.Reflections.scan(Reflections.java:232) - Reflections took 3 ms to scan 1 urls, producing 0 keys and 0 values 
+[2023-06-08 13:15:48:365] [INFO] - org.reflections.Reflections.scan(Reflections.java:232) - Reflections took 6 ms to scan 1 urls, producing 1 keys and 5 values 
+[2023-06-08 13:15:48:376] [INFO] - org.reflections.Reflections.scan(Reflections.java:232) - Reflections took 7 ms to scan 1 urls, producing 1 keys and 7 values 
+[2023-06-08 13:15:48:388] [INFO] - org.reflections.Reflections.scan(Reflections.java:232) - Reflections took 10 ms to scan 1 urls, producing 2 keys and 8 values 
+[2023-06-08 13:15:48:391] [INFO] - org.reflections.Reflections.scan(Reflections.java:232) - Reflections took 1 ms to scan 1 urls, producing 0 keys and 0 values 
+[2023-06-08 13:15:49:184] [WARN] - com.alibaba.cloud.nacos.client.NacosPropertySourceBuilder.loadNacosData(NacosPropertySourceBuilder.java:87) - Ignore the empty nacos configuration and get it based on dataId[smant-admin-gateway] & group[DEFAULT_GROUP]
+[2023-06-08 13:15:49:208] [WARN] - com.alibaba.cloud.nacos.client.NacosPropertySourceBuilder.loadNacosData(NacosPropertySourceBuilder.java:87) - Ignore the empty nacos configuration and get it based on dataId[smant-admin-gateway.yml] & group[DEFAULT_GROUP]
+[2023-06-08 13:15:49:260] [INFO] - org.springframework.cloud.bootstrap.config.PropertySourceBootstrapConfiguration.doInitialize(PropertySourceBootstrapConfiguration.java:134) - Located property source: [BootstrapPropertySource {name='bootstrapProperties-smant-admin-gateway-sdev.yml,DEFAULT_GROUP'}, BootstrapPropertySource {name='bootstrapProperties-smant-admin-gateway.yml,DEFAULT_GROUP'}, BootstrapPropertySource {name='bootstrapProperties-smant-admin-gateway,DEFAULT_GROUP'}, BootstrapPropertySource {name='bootstrapProperties-common-redis.yml,DEFAULT_GROUP'}, BootstrapPropertySource {name='bootstrapProperties-common-rabbitmq.yml,DEFAULT_GROUP'}]
+[2023-06-08 13:15:49:286] [INFO] - org.springframework.boot.SpringApplication.logStartupProfileInfo(SpringApplication.java:639) - The following 1 profile is active: "sdev"
+[2023-06-08 13:15:50:443] [INFO] - org.springframework.cloud.context.scope.GenericScope.setSerializationId(GenericScope.java:282) - BeanFactory id=a410cddd-a536-38a5-b40a-a727837d4965
+[2023-06-08 13:15:51:407] [INFO] - org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator.lambda$initFactories$1(RouteDefinitionRouteLocator.java:89) - Loaded RoutePredicateFactory [After]
+[2023-06-08 13:15:51:408] [INFO] - org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator.lambda$initFactories$1(RouteDefinitionRouteLocator.java:89) - Loaded RoutePredicateFactory [Before]
+[2023-06-08 13:15:51:408] [INFO] - org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator.lambda$initFactories$1(RouteDefinitionRouteLocator.java:89) - Loaded RoutePredicateFactory [Between]
+[2023-06-08 13:15:51:408] [INFO] - org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator.lambda$initFactories$1(RouteDefinitionRouteLocator.java:89) - Loaded RoutePredicateFactory [Cookie]
+[2023-06-08 13:15:51:409] [INFO] - org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator.lambda$initFactories$1(RouteDefinitionRouteLocator.java:89) - Loaded RoutePredicateFactory [Header]
+[2023-06-08 13:15:51:409] [INFO] - org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator.lambda$initFactories$1(RouteDefinitionRouteLocator.java:89) - Loaded RoutePredicateFactory [Host]
+[2023-06-08 13:15:51:409] [INFO] - org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator.lambda$initFactories$1(RouteDefinitionRouteLocator.java:89) - Loaded RoutePredicateFactory [Method]
+[2023-06-08 13:15:51:410] [INFO] - org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator.lambda$initFactories$1(RouteDefinitionRouteLocator.java:89) - Loaded RoutePredicateFactory [Path]
+[2023-06-08 13:15:51:410] [INFO] - org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator.lambda$initFactories$1(RouteDefinitionRouteLocator.java:89) - Loaded RoutePredicateFactory [Query]
+[2023-06-08 13:15:51:410] [INFO] - org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator.lambda$initFactories$1(RouteDefinitionRouteLocator.java:89) - Loaded RoutePredicateFactory [ReadBody]
+[2023-06-08 13:15:51:411] [INFO] - org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator.lambda$initFactories$1(RouteDefinitionRouteLocator.java:89) - Loaded RoutePredicateFactory [RemoteAddr]
+[2023-06-08 13:15:51:411] [INFO] - org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator.lambda$initFactories$1(RouteDefinitionRouteLocator.java:89) - Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+[2023-06-08 13:15:51:411] [INFO] - org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator.lambda$initFactories$1(RouteDefinitionRouteLocator.java:89) - Loaded RoutePredicateFactory [Weight]
+[2023-06-08 13:15:51:411] [INFO] - org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator.lambda$initFactories$1(RouteDefinitionRouteLocator.java:89) - Loaded RoutePredicateFactory [CloudFoundryRouteService]
+[2023-06-08 13:15:51:620] [WARN] - org.springframework.boot.devtools.autoconfigure.OptionalLiveReloadServer.startServer(OptionalLiveReloadServer.java:62) - Unable to start LiveReload server
+[2023-06-08 13:15:51:769] [WARN] - org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:616) - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+[2023-06-08 13:15:51:789] [INFO] - org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLogger.logMessage(ConditionEvaluationReportLogger.java:82) - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+[2023-06-08 13:15:51:806] [ERROR] - org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter.report(LoggingFailureAnalysisReporter.java:40) - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+[2023-06-08 13:15:51:811] [WARN] - com.alibaba.nacos.common.notify.NotifyCenter.shutdown(NotifyCenter.java:136) - [NotifyCenter] Start destroying Publisher
+[2023-06-08 13:15:51:811] [WARN] - com.alibaba.nacos.common.http.HttpClientBeanHolder.shutdown(HttpClientBeanHolder.java:108) - [HttpClientBeanHolder] Start destroying common HttpClient
+[2023-06-08 13:15:51:812] [WARN] - com.alibaba.nacos.common.notify.NotifyCenter.shutdown(NotifyCenter.java:153) - [NotifyCenter] Destruction of the end
+[2023-06-08 13:15:51:812] [WARN] - com.alibaba.nacos.common.http.HttpClientBeanHolder.shutdown(HttpClientBeanHolder.java:114) - [HttpClientBeanHolder] Destruction of the end

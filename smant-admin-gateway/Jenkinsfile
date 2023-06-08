@@ -4,7 +4,7 @@ pipeline {
         GIT_PROJECT_ADDR = "https://gitee.com/ylsk/erentals-modules-tenant.git"//gitee项目地址
         GIT_PROJECT_NAME = "smant-admin-gateway"//项目名称;服务名称
         GIT_PROJECT_BRANCH = "${params.GIT_BRANCH}"
-        GIT_CREDENTIALS_ID = "b95343cc-ed14-402c-b01d-08abdfe55fd4"//git 凭证
+        GIT_CREDENTIALS_ID = "87283845-bfca-4acb-950a-b3c855d526af"//git 凭证
         PROJECT_JAR_NAME = "smant-admin-gateway.jar"
         //IMAGE_REGISTRY = "139.224.1.8:8443"
         IMAGE_REGISTRY = "172.20.246.206:8443"
