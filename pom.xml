@@ -15,7 +15,7 @@
 
     <modules>
         <module>smant-admin-gateway</module>
-        <module>smant-api-gateway</module>
+        <module>smant-openapi-gateway</module>
         <module>smant-external-gateway</module>
         <module>smant-gateway-core</module>
     </modules>

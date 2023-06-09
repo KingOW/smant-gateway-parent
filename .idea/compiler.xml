@@ -7,10 +7,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="smant-external-gateway" />
+        <module name="smant-openapi-gateway" />
         <module name="smant-admin-gateway" />
-        <module name="smant-api-gateway" />
         <module name="smant-gateway-core" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="smant-api-gateway" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>
