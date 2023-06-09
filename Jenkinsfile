@@ -56,7 +56,7 @@ pipeline {
                 dir("${env.GIT_PROJECT_NAME}") {//进入项目工作目录
                     echo "========Compile&Package ${env.GIT_PROJECT_NAME} ========"
                     // 在有Jenkinsfile同一个目录下（项目的根目录下）
-                    sh "mvn -B -U -DskipTests clean compile package -P ${params.RUN_ENV}"
+                    sh "mvn -B -U -DskipTests clean compile package -P${params.RUN_ENV}"
                 }
             }
         }
