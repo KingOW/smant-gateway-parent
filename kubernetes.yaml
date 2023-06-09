@@ -28,7 +28,7 @@ spec:
             requests:
               cpu: "0.8"
               memory: "1000Mi"
-          command: ["java","-Dloader.path=/app/lib","-Dspring.cloud.bootstrap.location=/app/config/bootstrap.yml","-jar","/app/%{project_name}%.jar"]
+          command: ["java","-Dloader.path=/app/lib","-jar","/app/%{project_name}%.jar"]
           ports:
             - containerPort: 8080
           imagePullPolicy: IfNotPresent
