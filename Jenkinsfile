@@ -82,6 +82,7 @@ pipeline {
                     }
                     sh """
                             echo "镜像名称：${env.IMAGE_ADDR}/${env.GIT_PROJECT_NAME}:${env.IMAGE_VERSION_ID}"
+                            sed  -i "s|%{project_name}%|"${env.GIT_PROJECT_NAME}"|g" kubernetes.yaml
                             sed  -i "s|%{image_name}%|"${env.IMAGE_ADDR}/${env.GIT_PROJECT_NAME}:${env.IMAGE_VERSION_ID}"|g"  kubernetes.yaml
                         """
 

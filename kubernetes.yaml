@@ -3,23 +3,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: smant-admin-gateway-deployment
+  name: %{project_name}%-deployment
   namespace: smant
   labels:
-    smant.app/name: smant-admin-gateway
+    smant.app/name: %{project_name}%
 spec:
   replicas: 1
   selector:
     matchLabels:
-      smant.app/name: smant-admin-gateway
+      smant.app/name: %{project_name}%
   template:
     metadata:
       namespace: smant
       labels:
-        smant.app/name: smant-admin-gateway
+        smant.app/name: %{project_name}%
     spec:
       containers:
-        - name: smant-admin-gateway
+        - name: %{project_name}%
           image: %{image_name}%
           resources:
             limits:
@@ -28,25 +28,25 @@ spec:
             requests:
               cpu: "0.8"
               memory: "1000Mi"
-          command: ["java","-Dloader.path=/app/lib","-Dspring.cloud.bootstrap.location=/app/config/bootstrap.yml","-jar","/app/smant-admin-gateway.jar"]
+          command: ["java","-Dloader.path=/app/lib","-Dspring.cloud.bootstrap.location=/app/config/bootstrap.yml","-jar","/app/%{project_name}%.jar"]
           ports:
             - containerPort: 8080
           imagePullPolicy: IfNotPresent
-      imagePullSecrets:
-        - name: harbor-userpass
+#      imagePullSecrets:
+#        - name: harbor-userpass
 ---
 ### smant crm gateway service
 apiVersion: v1
 kind: Service
 metadata:
-  name: smant-admin-gateway
+  name: %{project_name}%
   namespace: smant
   labels:
-    smant.app/name: smant-admin-gateway
+    smant.app/name: %{project_name}%
 spec:
   type: ClusterIP
   selector:
-    smant.app/name: smant-admin-gateway
+    smant.app/name: %{project_name}%
   ports:
     - port: 80
       protocol: TCP
