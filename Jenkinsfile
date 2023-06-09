@@ -127,8 +127,8 @@ pipeline {
             sh """
                 rm -r "${env.PROJECT_WORKSPACE}"/"${env.PROJECT_JAR_NAME}"
                 rm -r "${env.PROJECT_WORKSPACE}"/lib
-                rm -r "${env.PROJECT_WORKSPACE}"/config
             """
         }
     }
 }
+//              rm -r "${env.PROJECT_WORKSPACE}"/config

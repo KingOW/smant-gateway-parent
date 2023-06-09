@@ -3,7 +3,7 @@ MAINTAINER Smant
 ENV TZ=Asia/Shanghai
 RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime
 COPY   lib/    /app/lib
-COPY   config/bootstrap.yml /app/config/bootstrap.yml
+#COPY   config/bootstrap.yml /app/config/bootstrap.yml
 
 COPY   @{project_run_jar}@  /app/@{project_run_jar}@
 #CMD echo "启动....."
