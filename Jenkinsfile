@@ -70,6 +70,7 @@ pipeline {
                 }
                 dir("${env.PROJECT_WORKSPACE}") {//进入项目工作目录
                     script {
+                        sed -i "s|%{project_run_jar}%|"${env.PROJECT_JAR_NAME}"|g"  kubernetes.yaml
                         def customImage = docker.build("${env.IMAGE_ADDR}/${env.GIT_PROJECT_NAME}:${env.IMAGE_VERSION_ID}", ".")
                         docker.withRegistry("${env.IMAGE_REGISTRY_PROTOCOL}://${env.IMAGE_REGISTRY}/${env.GIT_PROJECT_NAME}", "${env.IMAGE_REGISTRY_CREDENTIALS_ID}") {
                             customImage.push()
