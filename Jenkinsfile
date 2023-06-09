@@ -25,6 +25,7 @@ pipeline {
 
     tools {
         maven 'jenkins-maven3.8.1_2'
+        jdk 'jdk17'
     }
 
     stages {
