@@ -56,7 +56,7 @@ pipeline {
                 dir("${env.GIT_PROJECT_NAME}") {//进入项目工作目录
                     echo "========Compile&Package ${env.GIT_PROJECT_NAME} ========"
                     // 在有Jenkinsfile同一个目录下（项目的根目录下）
-                    sh "mvn -B -U -DskipTests clean compile package -P${params.RUN_ENV}"
+                    sh "mvn -B -U -DskipTests clean compile package -P ${params.RUN_ENV}"
                 }
             }
         }
@@ -67,7 +67,7 @@ pipeline {
                 echo "========Deploy ${env.GIT_PROJECT_NAME}  Docker Image & Push ========"
                 script {
                     //target/lib
-                    sh "cp -r Dockerfile kubernetes.yaml ${env.GIT_PROJECT_NAME}/target/lib ${env.GIT_PROJECT_NAME}/target/config  ${env.GIT_PROJECT_NAME}/target/${env.PROJECT_JAR_NAME}  ${env.PROJECT_WORKSPACE}"
+                    sh "cp -r Dockerfile kubernetes.yaml ${env.GIT_PROJECT_NAME}/target/lib   ${env.GIT_PROJECT_NAME}/target/${env.PROJECT_JAR_NAME}  ${env.PROJECT_WORKSPACE}"
                 }
                 dir("${env.PROJECT_WORKSPACE}") {//进入项目工作目录
 
