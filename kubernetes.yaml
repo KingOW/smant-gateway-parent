@@ -44,13 +44,14 @@ metadata:
   labels:
     smant.app/name: %{project_name}%
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     smant.app/name: %{project_name}%
   ports:
-    - port: 80
+    - port: 8080
       protocol: TCP
       targetPort: 8080
+      nodePort: 30534
 #      nodePort: 32144
 ---
 
