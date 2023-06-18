@@ -1,4 +1,4 @@
-FROM openjdk:17-jdk
+FROM openjdk:17
 MAINTAINER Smant
 ENV TZ=Asia/Shanghai
 RUN ln -sf /usr/share/zoneinfo/$TZ /etc/localtime
