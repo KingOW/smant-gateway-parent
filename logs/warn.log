@@ -1,0 +1,2 @@
+[2023-06-18 12:31:12:820] [WARN] - com.alibaba.cloud.nacos.client.NacosPropertySourceBuilder.loadNacosData(NacosPropertySourceBuilder.java:87) - Ignore the empty nacos configuration and get it based on dataId[smant-admin-gateway] & group[DEFAULT_GROUP]
+[2023-06-18 12:31:12:874] [WARN] - com.alibaba.cloud.nacos.client.NacosPropertySourceBuilder.loadNacosData(NacosPropertySourceBuilder.java:87) - Ignore the empty nacos configuration and get it based on dataId[smant-admin-gateway.yml] & group[DEFAULT_GROUP]
