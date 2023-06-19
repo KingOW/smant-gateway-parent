@@ -1,0 +1,116 @@
+package com.smant.gateway.core.filter;
+
+import com.alibaba.fastjson2.JSONObject;
+import com.smant.sdk.redis.service.RedisService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.gateway.filter.GatewayFilterChain;
+import org.springframework.cloud.gateway.filter.GlobalFilter;
+import org.springframework.core.Ordered;
+import org.springframework.core.io.buffer.DataBuffer;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.server.reactive.ServerHttpResponse;
+import org.springframework.stereotype.Component;
+import org.springframework.web.server.ServerWebExchange;
+import reactor.core.publisher.Mono;
+
+import java.io.UnsupportedEncodingException;
+import java.util.Base64;
+import java.util.concurrent.TimeUnit;
+
+@Component
+@Slf4j
+public class SecurityFilter implements Ordered, GlobalFilter {
+
+    @Autowired
+    @Qualifier(value = "redisService")
+    private RedisService redisService;
+
+    public final static String ATTRIBUTE_IGNORE_TEST_GLOBAL_FILTER = "@ignoreTestGlobalFilter";
+
+    @Value("${ERPCHECKTOKEN}")
+    private String tokenUrl;
+
+    public SecurityFilter() {
+    }
+    public SecurityFilter(String tokenUrl) {
+        this.tokenUrl = tokenUrl;
+    }
+
+    @Override
+    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+        //跳过检测
+        if (this.checkURL(exchange) ||exchange.getAttribute(ATTRIBUTE_IGNORE_TEST_GLOBAL_FILTER) != null) {
+            return chain.filter(exchange);
+        } else if (exchange.getRequest().getURI().getPath().equals("/jpush")) {
+            return chain.filter(exchange);
+        } else {
+            HttpHeaders headers = exchange.getRequest().getHeaders();
+            String token = headers.getFirst("Authorization");
+
+            // crm一端token验证
+            log.info("开始crm-token验证");
+            log.info("token：" + token);
+            String account = redisService.getString(token);
+            log.info("account：" + account);
+            if (!StringExtUtils.isEmpty(account)) {
+                redis.expire("token", 7200, TimeUnit.SECONDS); // 有效期更新
+                return chain.filter(exchange);
+            }
+            log.info("结束crm-token验证");
+
+            if (token == null || token.isEmpty()) {
+                ServerHttpResponse response = exchange.getResponse();
+                response.setStatusCode(HttpStatus.UNAUTHORIZED);
+                String warningStr = JSONObject.toJSONString(ResultBean._400("token丢失，请重新登录！"));
+                DataBuffer bodyDataBuffer = response.bufferFactory().wrap(warningStr.getBytes());
+                return response.writeWith(Mono.just(bodyDataBuffer));
+            } else {
+                String userInfo = ErpApiUtils.checkToken(token,tokenUrl);
+                if (StringUtils.isEmpty(userInfo)) {
+                    ServerHttpResponse response = exchange.getResponse();
+                    response.setStatusCode(HttpStatus.UNAUTHORIZED);
+                    String warningStr = JSONObject.toJSONString(ResultBean._400("token失效，请重新登录！"));
+                    DataBuffer bodyDataBuffer = response.bufferFactory().wrap(warningStr.getBytes());
+                    return response.writeWith(Mono.just(bodyDataBuffer));
+                }
+                // json格式获取
+                userInfo = userInfo.substring(1, userInfo.length() - 1);
+                // 用户信息
+                String info = "";
+                try {
+                    info = Base64.getEncoder().encodeToString(userInfo.getBytes("UTF-8"));
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+
+                String loginid = exchange.getRequest().getHeaders().getFirst("loginid");
+                if (StringUtil.isEmpty(loginid)) {
+                    exchange.getRequest().mutate().header("info", info);
+                }
+                System.out.println(exchange.getRequest().getHeaders());
+                exchange.getAttributes().put(SecurityFilter.ATTRIBUTE_IGNORE_TEST_GLOBAL_FILTER, true);
+                return chain.filter(exchange);
+            }
+        }
+    }
+
+    @Override
+    public int getOrder() {
+        return 10;
+    }
+
+    private boolean checkURL(ServerWebExchange exchange) {
+        String reqUrl = exchange.getRequest().getURI().toString();
+        if (reqUrl.contains("login") || reqUrl.contains("swagger") || reqUrl.contains("demo")
+                || reqUrl.contains("crmAccount") || reqUrl.contains("sign")) {
+            return true;
+        }
+        return false;
+    }
+
+
+}

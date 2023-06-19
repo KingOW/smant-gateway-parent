@@ -19,6 +19,14 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.smant.sdk</groupId>
+            <artifactId>smant-redis-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.smant</groupId>
+            <artifactId>smant-common</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
