@@ -12,8 +12,6 @@
     <artifactId>smant-gateway-core</artifactId>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -25,6 +23,16 @@
         <dependency>
             <groupId>com.smant</groupId>
             <artifactId>smant-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.smant.auth</groupId>
+            <artifactId>smant-auth-client</artifactId>
+            <version>2023.05.23-RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>com.smant.auth</groupId>
+            <artifactId>smant-auth-core</artifactId>
+            <version>2023.05.23-RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

@@ -10,10 +10,8 @@
         <module name="smant-openapi-gateway" />
         <module name="smant-admin-gateway" />
         <module name="smant-gateway-core" />
+        <module name="demo" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="smant-api-gateway" target="17" />
-    </bytecodeTargetLevel>
   </component>
 </project>

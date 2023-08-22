@@ -1,0 +1,38 @@
+filebeat.inputs:
+- type: "log"
+  enabled: true
+  paths:
+    - /logs/error.log
+  multiline.pattern: '^['
+  multiline.negate: true
+  multiline.match: after
+  tags: ["error"]
+  fields:
+    envtag: "prod"
+    podName: "${POD_NAME}"
+    podIp: "${POD_IP}"
+    serName: "${SERVICE_NAME}"
+- type: "log"
+  enabled: true
+  paths:
+    - /logs/info.log
+  multiline.pattern: '^20'
+  multiline.negate: true
+  multiline.match: after
+  tags: ["info"]
+  fields:
+    envtag: "prod"
+    podName: "${POD_NAME}"
+    podIp: "${POD_IP}"
+    serName: "${SERVICE_NAME}"
+output.elasticsearch:
+  hosts: ["172.20.246.204:19200"]
+  username: "elastic"
+  password: "123456"
+  indices:
+    - index: "k8s-error-%{+yyyy.MM.dd}"
+      when.contains:
+          tags: "error"
+    - index: "k8s-info-%{+yyyy.MM.dd}"
+      when.contains:
+          tags: "info"

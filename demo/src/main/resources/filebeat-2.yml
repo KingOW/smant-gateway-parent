@@ -1,0 +1,30 @@
+filebeat.inputs:
+- type: "log"
+  enabled: true
+  paths:
+    - /usr/local/nginx/logs/error.log
+  tags: ["nginx-error"]
+  fields:
+    envtag: "prod"
+    serName: "Erentals-Web"
+- type: "log"
+  enabled: true
+  paths:
+    - /usr/local/nginx/logs/access.log
+  tags: ["nginx-access"]
+  fields:
+    envtag: "prod"
+    serName: "Erentals-Web"
+
+
+output.elasticsearch:
+  hosts: ["172.20.246.204:19200"]
+  username: "elastic"
+  password: "123456"
+  indices:
+    - index: "nginx-error-%{+yyyy.MM.dd}"
+      when.contains:
+        tags: "nginx-error"
+    - index: "nginx-access-%{+yyyy.MM.dd}"
+      when.contains:
+        tags: "nginx-access"

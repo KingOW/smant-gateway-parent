@@ -18,12 +18,10 @@
         <module>smant-openapi-gateway</module>
         <module>smant-external-gateway</module>
         <module>smant-gateway-core</module>
+        <module>demo</module>
     </modules>
 
     <properties>
-        <java.version>17</java.version>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <com.smant.common.version>2023.05.23-RELEASE</com.smant.common.version>
         <com.smant.sdk.version>2023.05.23-RELEASE</com.smant.sdk.version>

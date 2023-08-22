@@ -37,3 +37,17 @@ spring:
           - data-id: common-redis.yml
             group: @nacos.discovery.group@
             refresh: true
+          - data-id: common-service.yml
+            group: @nacos.discovery.group@
+            refresh: true
+
+security:
+  ignore:
+    whites:
+      - /auth/login
+      - /auth/register
+
+service:
+  smant-auth-token:
+    name: smant-auth-token
+    uri: http://localhost:8082/

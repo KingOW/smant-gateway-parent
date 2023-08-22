@@ -1,0 +1,110 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo
+  namespace: erentals
+  labels:
+    ylsk.erentals.app/name: demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      ylsk.erentals.app/name: demo
+  template:
+    metadata:
+      name: demo
+      namespace: erentals
+      labels:
+        ylsk.erentals.app/name: demo
+    spec:
+      containers:
+        - name: demo
+          image: 172.20.246.206:8443/erentals/erentals-gateway:k8s-20230630134642
+          command: ["java","-Dloader.path=/app/lib","-Dspring.cloud.bootstrap.location=/app/config/bootstrap.yml","-jar","/app/erentals-gateway.jar"]
+          ports:
+            - name: http8080
+              containerPort: 8080
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /hello
+              port: 8080
+            initialDelaySeconds: 3 # 容器启动完成后首次探测的时间，单位为秒
+            timeoutSeconds: 2   # 对容器健康检查探测等待响应的超时时间，单位秒，默认1秒
+            periodSeconds: 1    # 对容器监控检查的定期探测时间设置，单位秒，默认10秒一次
+            successThreshold: 1 # 成功1次算探针OK
+            failureThreshold: 3 # 失败三次算探针失败
+          restartPolicy: Always  # 可选 默认Always 容器故障或者没有启动成功 自动重启该容器 Onfailure: 容器以不为0的状态码终止 自动重启该容器 Never：无论何种状态 都不会重启
+          volumeMounts:
+            - mountPath: /logs
+              name: logdata
+            - name: timezone
+              mountPath: /etc/localtime
+        - name: filebeat
+          image: docker.elastic.co/beats/filebeat:7.17.12
+          args: ["-c", "/app/filebeat/filebeat.yml", "-e",]
+          env:
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: SERVICE_NAME
+              value: "demo"
+          securityContext:
+            runAsUser: 0
+          resources:
+            limits:
+              memory: 1000Mi
+            requests:
+              cpu: 500m
+              memory: 800Mi
+          volumeMounts:
+            - mountPath: /app/filebeat
+              name: filebeat-config-volume
+            - name: data
+              mountPath: /usr/share/filebeat/data
+            - name: logdata
+              mountPath: /logs
+            - name: timezone
+              mountPath: /etc/localtime
+      imagePullSecrets:
+        - name: harbor-userpass
+      volumes:
+        - name: timezone
+          hostPath:
+            path: /usr/share/zoneinfo/Asia/Shanghai
+        - name: data
+          emptyDir: {}
+        - name: logdata
+          emptyDir: {}
+        - name: filebeat-config-volume
+          configMap:
+            name: filebeat-config
+            items:
+              - key: filebeat.yml
+                path: filebeat.yml
+---
+### smant crm gateway service
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo
+  namespace: erentals
+  labels:
+    ylsk.erentals.app/name: demo
+spec:
+  type: NodePort
+  selector:
+    ylsk.erentals.app/name: demo
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 8080
+      nodePort: 30099
+---
+
