@@ -2,7 +2,7 @@ pipeline {
     agent any //在任何可用的代理上执行流水线或阶段
     environment {//环境变量
         GIT_PROJECT_NAME = "${params.GATEWAY_PROJECT}"//项目名称;服务名称
-        GIT_CREDENTIALS_ID = "coding-user"//git/coding 凭证
+        GIT_CREDENTIALS_ID = "github-user"//git/coding 凭证
         VERSION = sh(script: "echo `date '+%Y%m%d%H'`", returnStdout: true).trim()
         VERSION_ID = "${env.VERSION}-${env.BUILD_ID}"
 
@@ -14,9 +14,9 @@ pipeline {
     }
 
     tools {
-        maven 'jenkins-tool-maven3.9.4'
-        jdk 'jenkins-tool-jdk21.0.4'
-        nodejs 'jenkins-tool-nodejs14.9.0'
+             maven 'jenkins-tool-maven3.9.4'
+             jdk 'jenkins-tool-jdk23.0.1'
+             nodejs 'jenkins-tool-nodejs14.9.0'
     }
 
     stages {
