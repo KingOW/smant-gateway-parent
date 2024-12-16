@@ -1,4 +1,4 @@
-FROM openjdk:21
+FROM openjdk:23
 MAINTAINER Smant
 ENV LANG en_US.UTF-8
 ENV TZ=Asia/Shanghai
