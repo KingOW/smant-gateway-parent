@@ -6,39 +6,47 @@
     <parent>
         <groupId>com.smant</groupId>
         <artifactId>smant-hub</artifactId>
-        <version>2023.05.23-RELEASE</version>
+        <version>2024.07.01-SNAPSHOT</version>
     </parent>
-    <groupId>com.smant.gateway</groupId>
     <artifactId>smant-gateway-parent</artifactId>
     <packaging>pom</packaging>
-    <version>2023.05.23-RELEASE</version>
-
     <modules>
-        <module>smant-admin-gateway</module>
-        <module>smant-openapi-gateway</module>
-        <module>smant-external-gateway</module>
         <module>smant-gateway-core</module>
-        <module>demo</module>
+        <module>smant-openapi-gateway</module>
+        <module>smant-intersys-gateway</module>
     </modules>
 
     <properties>
+        <maven.compiler.source>23</maven.compiler.source>
+        <maven.compiler.target>23</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <com.smant.common.version>2023.05.23-RELEASE</com.smant.common.version>
-        <com.smant.sdk.version>2023.05.23-RELEASE</com.smant.sdk.version>
+        <com.alibaba.fastjson2.version>2.0.11</com.alibaba.fastjson2.version>
+        <com.smant.common.version>2024.07.01-SNAPSHOT</com.smant.common.version>
     </properties>
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>com.alibaba.fastjson2</groupId>
+            <artifactId>fastjson2</artifactId>
+            <version>${com.alibaba.fastjson2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.fastjson2</groupId>
+            <artifactId>fastjson2-extension</artifactId>
+            <version>${com.alibaba.fastjson2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.smant</groupId>
+            <artifactId>smant-common-core</artifactId>
+            <version>${com.smant.common.version}</version>
+        </dependency>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.smant.sdk</groupId>
-                <artifactId>smant-redis-starter</artifactId>
-                <version>${com.smant.sdk.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.smant</groupId>
-                <artifactId>smant-common</artifactId>
-                <version>${com.smant.common.version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+
+        <dependency>
+            <groupId>com.smant</groupId>
+            <artifactId>smant-common-redis</artifactId>
+            <version>${com.smant.common.version}</version>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
 </project>
