@@ -1,0 +1,1 @@
+#smant-gateway-parent
