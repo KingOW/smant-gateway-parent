@@ -1,0 +1,31 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: smant-openapi-gateway
+  main:
+    allow-circular-references: true
+    allow-bean-definition-overriding: true
+  config:
+    import:
+      - optional:nacos:${spring.application.name}.${spring.cloud.nacos.config.file-extension}
+  cloud:
+    nacos:
+      username: nacos
+      password: Ryds.naocs
+      discovery:
+        server-addr: nacos-service:8848
+        namespace: smant
+        group: DEFAULT_GROUP
+      config:
+        server-addr: nacos-service:8848
+        namespace: smant
+        group: DEFAULT_GROUP
+        file-extension: yaml
+        name: ${spring.application.name}.${spring.cloud.nacos.config.file-extension}
+        shared-configs:
+          - data-id: smant-redis.yaml
+            group: DEFAULT_GROUP
+            refresh: true
+
+

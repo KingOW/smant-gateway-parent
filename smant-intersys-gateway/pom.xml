@@ -8,15 +8,11 @@
         <artifactId>smant-gateway-parent</artifactId>
         <version>2024.07.01-SNAPSHOT</version>
     </parent>
-
-    <artifactId>smant-openapi-gateway</artifactId>
-
+    <artifactId>smant-intersys-gateway</artifactId>
 
     <properties>
         <com.smant.gateway.core.version>2024.07.01-SNAPSHOT</com.smant.gateway.core.version>
     </properties>
-
-
     <dependencies>
         <!-- SpringCloud Alibaba Nacos -->
         <!--        <dependency>-->
@@ -110,7 +106,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <includeSystemScope>true</includeSystemScope>
-                    <mainClass>com.smant.openapi.gateway.application.SmantGatewayApplication</mainClass>
+                    <mainClass>com.smant.intersys.gateway.application.SmantGatewayApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>

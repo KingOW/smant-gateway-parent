@@ -4,41 +4,30 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.smant.gateway</groupId>
+        <groupId>com.smant</groupId>
         <artifactId>smant-gateway-parent</artifactId>
-        <version>2023.05.23-RELEASE</version>
+        <version>2024.07.01-SNAPSHOT</version>
     </parent>
-
     <artifactId>smant-gateway-core</artifactId>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>com.smant.sdk</groupId>
-            <artifactId>smant-redis-starter</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-gateway</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
-        <dependency>
-            <groupId>com.smant</groupId>
-            <artifactId>smant-common</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.smant.auth</groupId>
-            <artifactId>smant-auth-client</artifactId>
-            <version>2023.05.23-RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>com.smant.auth</groupId>
-            <artifactId>smant-auth-core</artifactId>
-            <version>2023.05.23-RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>provided</scope>
-        </dependency>
+        <!-- SpringBoot Web -->
+
+        <!-- mybatis-plus多数据源 -->
+
 
         <!-- 支持log4j2的模块，注意把spring-boot-starter和spring-boot-starter-web包中的logging去掉 -->
         <dependency>
@@ -47,21 +36,39 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <!-- SpringCloud Gateway -->
-        <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-gateway</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>spring-boot-starter-logging</artifactId>
-                    <groupId>org.springframework.boot</groupId>
-                </exclusion>
-            </exclusions>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+        <!-- Kafka 依赖 -->
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+
+        <!-- Java Servlet -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.fastjson2</groupId>
+            <artifactId>fastjson2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.fastjson2</groupId>
+            <artifactId>fastjson2-extension</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.smant</groupId>
+            <artifactId>smant-common-core</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.smant</groupId>
+            <artifactId>smant-common-redis</artifactId>
         </dependency>
     </dependencies>
+
 
 </project>

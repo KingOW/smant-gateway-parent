@@ -1,4 +1,5 @@
-### deployment
+### eraentals gateway deployment
+#####
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -23,36 +24,32 @@ spec:
           image: %{image_name}%
           resources:
             limits:
-              memory: "1500Mi"
-              cpu: "1.5"
+              memory: "3000Mi"
+              cpu: "2"
             requests:
-              cpu: "0.8"
-              memory: "1000Mi"
-          command: ["java","-Dloader.path=/app/lib","-jar","/app/%{project_name}%.jar"]
+              cpu: "1"
+              memory: "2048Mi"
+          command: ["java","-Djava.security.egd=file:/dev/./urandom","-Dspring.profiles.active=%{active_profile}%","-jar","/app/app.jar"]
           ports:
             - containerPort: 8080
           imagePullPolicy: IfNotPresent
-#      imagePullSecrets:
-#        - name: harbor-userpass
 ---
 ### smant crm gateway service
 apiVersion: v1
 kind: Service
 metadata:
-  name: %{project_name}%
+  name: %{project_name}%-service
   namespace: smant
   labels:
     smant.app/name: %{project_name}%
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     smant.app/name: %{project_name}%
   ports:
-    - port: 8080
+    - port: 80
       protocol: TCP
       targetPort: 8080
-      nodePort: 30534
-#      nodePort: 32144
 ---
 
 
