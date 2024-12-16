@@ -24,11 +24,11 @@ spec:
           image: %{image_name}%
           resources:
             limits:
-              memory: "3000Mi"
-              cpu: "2"
+              memory: "600Mi"
+              cpu: "0.8"
             requests:
-              cpu: "1"
-              memory: "2048Mi"
+              cpu: "0.5"
+              memory: "400Mi"
           command: ["java","-Djava.security.egd=file:/dev/./urandom","-Dspring.profiles.active=%{active_profile}%","-jar","/app/app.jar"]
           ports:
             - containerPort: 8080
