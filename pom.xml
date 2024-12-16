@@ -20,7 +20,6 @@
         <maven.compiler.source>23</maven.compiler.source>
         <maven.compiler.target>23</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <com.alibaba.fastjson2.version>2.0.11</com.alibaba.fastjson2.version>
         <com.smant.common.version>2024.07.01-SNAPSHOT</com.smant.common.version>
     </properties>
 <dependencyManagement>

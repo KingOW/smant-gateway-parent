@@ -11,8 +11,6 @@
     <artifactId>smant-intersys-gateway</artifactId>
 
     <properties>
-        <com.baomidou.mybatis-plus.starter.version>3.5.1</com.baomidou.mybatis-plus.starter.version>
-        <com.alibaba.fastjson2.version>2.0.11</com.alibaba.fastjson2.version>
         <com.smant.gateway.core.version>2024.07.01-SNAPSHOT</com.smant.gateway.core.version>
     </properties>
     <dependencies>
@@ -41,11 +39,6 @@
         <!-- SpringBoot Web -->
 
         <!-- mybatis-plus多数据源 -->
-
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
 
 
         <!-- 支持log4j2的模块，注意把spring-boot-starter和spring-boot-starter-web包中的logging去掉 -->

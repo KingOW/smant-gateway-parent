@@ -1,5 +1,6 @@
 package com.smant.intersys.gateway.application;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.Banner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -11,11 +12,11 @@ import org.springframework.core.SpringVersion;
         "com.smant.gateway.core",
         "com.smant.common.redis",
         "com.smant.common.core"},exclude = { DataSourceAutoConfiguration.class})
-@Slf4j
 @RefreshScope
 public class SmantGatewayApplication {
+    private static final Logger LOGGER = LoggerFactory.getLogger(SmantGatewayApplication.class);
     public static void main(String[] args) {
-        log.info("Smant  网关启动==========>");
+        LOGGER.info("Smant  网关启动==========>");
         new SpringApplicationBuilder(SmantGatewayApplication.class)
                 .main(SpringVersion.class)
                 .bannerMode(Banner.Mode.CONSOLE)

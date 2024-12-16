@@ -6,9 +6,10 @@ import com.smant.common.core.constants.CacheConstants;
 import com.smant.common.core.constants.HttpHeaderKeys;
 import com.smant.common.core.utils.IpUtils;
 import com.smant.common.redis.service.RedisService;
-import lombok.extern.slf4j.Slf4j;
 import com.smant.common.core.utils.StringExtUtils;
 import org.reactivestreams.Publisher;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
@@ -35,8 +36,9 @@ import java.util.concurrent.TimeUnit;
  * 操作日志 门户 过滤器
  */
 @Component(value = "OperateLog")
-@Slf4j
 public class OperateLogGatewayFilterFactory extends AbstractGatewayFilterFactory<OperateLogGatewayFilterFactory.Config> {
+
+    private final static Logger LOGGER = LoggerFactory.getLogger(OperateLogGatewayFilterFactory.class);
 
     /**
      * 操作日志 gateway
@@ -59,7 +61,7 @@ public class OperateLogGatewayFilterFactory extends AbstractGatewayFilterFactory
             ServerHttpRequest request = exchange.getRequest();
             long startTime = System.currentTimeMillis();
             this.CacheRequestInfo(request);
-            log.info("用户操作================:校验令牌,请求路径=" + request.getURI());
+            LOGGER.info("用户操作================:校验令牌,请求路径=" + request.getURI());
             return chain.filter(exchange).then(Mono.fromRunnable(() -> {
                 ServerHttpResponse response = exchange.getResponse();
                 long requetTime = System.currentTimeMillis() - startTime;
@@ -72,7 +74,7 @@ public class OperateLogGatewayFilterFactory extends AbstractGatewayFilterFactory
 
     private Map<String, Object> CacheRequestInfo(ServerHttpRequest request) {
         String systemCode = request.getHeaders().getFirst(HttpHeaderKeys.HTTP_HEADER_USYSTEM_CODE);
-        log.info("请求路径==" + request.getURI() + " 请求系统==" + systemCode);
+        LOGGER.info("请求路径==" + request.getURI() + " 请求系统==" + systemCode);
         String requestId = request.getHeaders().getFirst(HttpHeaderKeys.HTTP_HEADER_REQUEST_ID);
         String loginToken = request.getHeaders().getFirst(HttpHeaderKeys.HTTP_HEADER_ULOGIN_TOKEN);
         String loginUserId = request.getHeaders().getFirst(HttpHeaderKeys.HTTP_HEADER_ULOGIN_USERID);
@@ -93,11 +95,11 @@ public class OperateLogGatewayFilterFactory extends AbstractGatewayFilterFactory
         requestInfo.put(CacheConstants.CACHE_KEY_REQUEST_START_TIME, LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
         requestInfo.put(CacheConstants.CACHE_KEY_REQUEST_QUERY_PARAMS, StringExtUtils.trimStr(request.getQueryParams().toString()));
         try {
-            log.info("请求数据：" + JSONObject.toJSONString(requestInfo));
+            LOGGER.info("请求数据：" + JSONObject.toJSONString(requestInfo));
             this.redisService.setCacheMap(CacheConstants.CACHE_KEY_REQUEST_INFO_PREFIX + requestId, requestInfo, 600L);
             this.redisService.expire(CacheConstants.CACHE_KEY_REQUEST_INFO_PREFIX + requestId, 1, TimeUnit.HOURS);//1个小时有效期
         } catch (Exception ex) {
-            log.error("保存请求数据到缓存中失败：服务器出现异常.", ex);
+            LOGGER.error("保存请求数据到缓存中失败：服务器出现异常.", ex);
         }
         return requestInfo;
     }
@@ -124,7 +126,7 @@ public class OperateLogGatewayFilterFactory extends AbstractGatewayFilterFactory
                             //释放掉内存
                             DataBufferUtils.release(dataBuffer);
                             String resResponse = new String(content, Charset.forName("UTF-8"));
-                            log.info("响应结果=====>"+resResponse);
+                            LOGGER.info("响应结果=====>" + resResponse);
                             byte[] uppedContent = resResponse.getBytes();
                             return bufferFactory.wrap(uppedContent);
                         }));
@@ -138,12 +140,12 @@ public class OperateLogGatewayFilterFactory extends AbstractGatewayFilterFactory
                 }
             };
             this.redisService.setCacheMap(CacheConstants.CACHE_KEY_REQUEST_INFO_PREFIX + requestId, infoMap, 600);
-            log.info("缓存请求数据" + requestTime);
+            LOGGER.info("缓存请求数据" + requestTime);
 //            Map<String, String> msgMap = Maps.newHashMap();
 //            msgMap.put(KafkaConstants.KAFKA_MESSAGE_KEY_REQUEST_INFO_KEY, CacheConstants.CACHE_KEY_REQUEST_INFO_SUFFIX + requestId);
 //            kafkaTemplate.send(KafkaConstants.KAFKA_TOPIC_SAVE_OPERLOG, JSONObject.toJSONString(msgMap));
         } catch (Exception ex) {
-            log.error("保存请求数据到缓存中失败：服务器出现异常.", ex);
+            LOGGER.error("保存请求数据到缓存中失败：服务器出现异常.", ex);
         }
 
     }
