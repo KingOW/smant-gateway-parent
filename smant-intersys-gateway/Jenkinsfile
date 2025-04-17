@@ -1,7 +1,9 @@
 pipeline {
     agent any //在任何可用的代理上执行流水线或阶段
     environment {//环境变量
-        GIT_PROJECT_NAME = "${params.GATEWAY_PROJECT}"//项目名称;服务名称
+        GIT_PROJECT_NAME = "smant-intersys-gateway"//项目名称;服务名称
+        GIT_PROJECT_BRANCH = "${params.GATEWAY_BRANCH}"//分支名称
+        GIT_PROJECT_ADDR = "https://github.com/KingOW/smant-gateway-parent.git"//git地址
         GIT_CREDENTIALS_ID = "github-user"//git/coding 凭证
         VERSION = sh(script: "echo `date '+%Y%m%d%H'`", returnStdout: true).trim()
         VERSION_ID = "${env.VERSION}-${env.BUILD_ID}"
@@ -31,12 +33,12 @@ pipeline {
             }
         }
         //检出代码
-//         stage("Check Out") {
-//             steps {
-//                 echo "========Check Out ${env.GIT_PROJECT_NAME} From Gitee========"
-//                 git branch: "${env.GIT_PROJECT_BRANCH}", credentialsId: "${env.GIT_CREDENTIALS_ID}", url: "${env.GIT_PROJECT_ADDR}"
-//             }
-//         }
+        stage("Check Out") {
+            steps {
+                echo "========Check Out ${env.GIT_PROJECT_NAME} From Gitee========"
+                git branch: "${env.GIT_PROJECT_BRANCH}", credentialsId: "${env.GIT_CREDENTIALS_ID}", url: "${env.GIT_PROJECT_ADDR}"
+            }
+        }
         //编译&打包
         stage("Compile&Package") {
             steps {
