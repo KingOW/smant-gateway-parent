@@ -2,7 +2,7 @@ pipeline {
     agent any //在任何可用的代理上执行流水线或阶段
     environment {//环境变量
         GIT_PROJECT_NAME = "smant-intersys-gateway"//项目名称;服务名称
-        GIT_PROJECT_BRANCH = "${params.GATEWAY_BRANCH}"//分支名称
+        GIT_PROJECT_BRANCH = "${params.GIT_BRANCH}"//分支名称
         GIT_PROJECT_ADDR = "https://github.com/KingOW/smant-gateway-parent.git"//git地址
         GIT_CREDENTIALS_ID = "github-user"//git/coding 凭证
         VERSION = sh(script: "echo `date '+%Y%m%d%H'`", returnStdout: true).trim()
