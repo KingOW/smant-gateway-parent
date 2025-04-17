@@ -9,10 +9,10 @@ pipeline {
         VERSION_ID = "${env.VERSION}-${env.BUILD_ID}"
 
         IMAGE_REGISTRY_CREDENTIALS_ID = "harbor-user" //镜像仓库凭证
-        IMAGE_NAME = "harbor.ryds.cn/ryds/${env.GIT_PROJECT_NAME}:${env.VERSION_ID}";
-        IMAGE_PUSH_ADDR = "https://harbor.ryds.cn/ryds/${env.GIT_PROJECT_NAME}"
+        IMAGE_NAME = "harbor.ryds.cn/smant/${env.GIT_PROJECT_NAME}:${env.VERSION_ID}";
+        IMAGE_PUSH_ADDR = "https://harbor.ryds.cn/smant/${env.GIT_PROJECT_NAME}"
         IAMGE_K8S_ADDR_DOMAIN = "${env.IMAGE_NAME}"
-        IAMGE_K8S_ADDR_INTRANET_IP = "172.16.239.35/ryds/${env.GIT_PROJECT_NAME}:${env.VERSION_ID}"
+        IAMGE_K8S_ADDR_INTRANET_IP = "172.16.239.35/smant/${env.GIT_PROJECT_NAME}:${env.VERSION_ID}"
     }
 
     tools {
@@ -52,7 +52,7 @@ pipeline {
         stage("Make Docker Image && Push") {
             steps {
                 echo "========Deploy ${env.GIT_PROJECT_NAME}  Docker Image & Push ========"
- dir("${env.GIT_PROJECT_NAME}") {//进入项目工作目录
+                    dir("${env.GIT_PROJECT_NAME}") {//进入项目工作目录
                     script {
                         def customImage = docker.build("${env.IMAGE_NAME}", ".")
                         docker.withRegistry("${env.IMAGE_PUSH_ADDR}", "${env.IMAGE_REGISTRY_CREDENTIALS_ID}") {
@@ -64,6 +64,9 @@ pipeline {
         }
         stage("Prod Env: Push Kubernetes ") {
             steps {
+
+                   echo "========Kubernetes apply  ${env.GIT_PROJECT_NAME}   ========"
+                   dir("${env.GIT_PROJECT_NAME}") {//进入项目工作目录
                     sh """
                            echo "镜像名称：${env.IMAGE_NAME}"
                            sed  -i "s|%{project_name}%|"${env.GIT_PROJECT_NAME}"|g"  kubernetes.yaml
@@ -72,6 +75,7 @@ pipeline {
                            echo "执行kubectl apply"
                            kubectl apply -f kubernetes.yaml --kubeconfig=/root/.kube/config-prod
                        """
+                   }
                 }
         }
     }
